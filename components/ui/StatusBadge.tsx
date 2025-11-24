@@ -14,6 +14,7 @@ export function StatusBadge({ status }: { status: Status }) {
     status === "submitted"
       ? "bg-emerald-100 text-emerald-700"
       : status === "typing" || status === "active"
+      ? "bg-blue-100 text-blue-700"
       : "bg-slate-200 text-slate-700";
 
   return <span className={`${base} ${color}`}>{labelMap[status]}</span>;
