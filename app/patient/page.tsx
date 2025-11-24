@@ -2,10 +2,7 @@
 
 import { useState } from "react";
 import Swal from "sweetalert2";
-import {
-  patientSchema,
-  type PatientData
-} from "@/lib/validation";
+import { patientSchema, type PatientData } from "@/lib/validation";
 import { useRealtimePatient } from "@/lib/useRealtimePatient";
 import { FieldInput } from "@/components/ui/FieldInput";
 import { SectionCard } from "@/components/ui/SectionCard";
@@ -25,7 +22,7 @@ const initial: PatientData = {
   emergencyContactName: "",
   emergencyContactRelationship: "",
   religion: "",
-  status: "inactive"
+  status: "inactive",
 };
 
 export default function PatientPage() {
@@ -39,7 +36,7 @@ export default function PatientPage() {
     const next: PatientData = {
       ...form,
       [key]: value,
-      status: "typing"
+      status: "typing",
     };
     setForm(next);
     // ส่ง realtime ระหว่างกรอก
@@ -51,7 +48,7 @@ export default function PatientPage() {
 
     const parsed = patientSchema.safeParse({
       ...form,
-      status: "submitted"
+      status: "submitted",
     });
 
     if (!parsed.success) {
@@ -75,7 +72,7 @@ export default function PatientPage() {
       icon: "success",
       title: "บันทึกข้อมูลสำเร็จ",
       timer: 1800,
-      showConfirmButton: false
+      showConfirmButton: false,
     });
 
     // เคลียร์ฟอร์มฝั่ง patient (แต่ไม่ส่งค่าเคลียร์กลับไป staff)
@@ -127,7 +124,23 @@ export default function PatientPage() {
               onChange={(v) => updateField("lastName", v)}
             />
           </div>
-
+          <div className="grid sm:grid-cols-3 gap-4">
+            <FieldInput
+              label="Date of Birth"
+              type="date"
+              required
+              value={form.dateOfBirth}
+              error={errors.dateOfBirth}
+              onChange={(v) => updateField("dateOfBirth", v)}
+            />
+            <FieldInput
+              label="Gender"
+              required
+              value={form.gender}
+              error={errors.gender}
+              onChange={(v) => updateField("gender", v)}
+            />
+          </div>
         </SectionCard>
 
         <SectionCard title="Contact Information">
