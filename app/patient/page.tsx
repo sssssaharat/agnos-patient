@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Swal from "sweetalert2";
 import {
   patientSchema,
   type PatientData
@@ -41,7 +42,8 @@ export default function PatientPage() {
       status: "typing"
     };
     setForm(next);
-    sendUpdate(next); // ส่งทุกครั้งที่พิมพ์
+    // ส่ง realtime ระหว่างกรอก
+    sendUpdate(next);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -64,10 +66,22 @@ export default function PatientPage() {
 
     setSubmitting(true);
     const finalData = parsed.data;
-    setForm(finalData);
+
+    // ส่ง snapshot ที่สมบูรณ์ไปให้ staff
     await sendUpdate(finalData);
+
+    // แสดง sweetalert
+    await Swal.fire({
+      icon: "success",
+      title: "บันทึกข้อมูลสำเร็จ",
+      timer: 1800,
+      showConfirmButton: false
+    });
+
+    // เคลียร์ฟอร์มฝั่ง patient (แต่ไม่ส่งค่าเคลียร์กลับไป staff)
+    setForm(initial);
     setErrors({});
-    setTimeout(() => setSubmitting(false), 400);
+    setSubmitting(false);
   };
 
   return (
@@ -114,23 +128,6 @@ export default function PatientPage() {
             />
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-4">
-            <FieldInput
-              label="Date of Birth"
-              type="date"
-              required
-              value={form.dateOfBirth}
-              error={errors.dateOfBirth}
-              onChange={(v) => updateField("dateOfBirth", v)}
-            />
-            <FieldInput
-              label="Gender"
-              required
-              value={form.gender}
-              error={errors.gender}
-              onChange={(v) => updateField("gender", v)}
-            />
-          </div>
         </SectionCard>
 
         <SectionCard title="Contact Information">
