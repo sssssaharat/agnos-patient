@@ -54,7 +54,7 @@ A real-time patient intake platform that allows healthcare staff to monitor form
 
 # 🚀 Setup & Run
 **Install dependencies**
-npm install
+* npm install
 
 # Create .env.local
 * NEXT_PUBLIC_PUSHER_KEY=
