@@ -7,6 +7,7 @@ type FieldInputProps = {
   required?: boolean;
   error?: string;
   type?: string;
+  max?: string; 
 };
 
 export function FieldInput({
@@ -15,7 +16,8 @@ export function FieldInput({
   onChange,
   required,
   error,
-  type = "text"
+  type = "text",
+  max
 }: FieldInputProps) {
   return (
     <div className="space-y-1">
@@ -27,6 +29,7 @@ export function FieldInput({
         type={type}
         className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white"
         value={value}
+        max={max} 
         onChange={(e) => onChange(e.target.value)}
       />
       {error && <p className="text-xs text-red-500">{error}</p>}

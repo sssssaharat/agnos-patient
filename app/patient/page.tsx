@@ -399,6 +399,7 @@ export default function PatientPage() {
               label="Date of Birth"
               type="date"
               value={form.dateOfBirth ?? ""}
+              max={new Date().toISOString().split("T")[0]}   // จำกัดวันไม่ให้เกินวันนี้
               onChange={(v) => updateField("dateOfBirth", v)}
             />
 
