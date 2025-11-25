@@ -12,6 +12,8 @@ import { FieldInput } from "@/components/ui/FieldInput";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { NationalitySelect } from "@/components/ui/NationalitySelect";
+import { ReligionSelect } from "@/components/ui/ReligionSelect";
+import { RelationshipSelect } from "@/components/ui/RelationshipSelect";
 
 
 const initial: PatientData = {
@@ -109,17 +111,6 @@ export default function PatientPage() {
     };
   }, []);
 
-  // helper สำหรับ multi-select
-  const handleMultiSelect =
-    (key: "nationality" | "religion") =>
-    (options: HTMLSelectElement["options"]) => {
-      const values: string[] = [];
-      for (let i = 0; i < options.length; i++) {
-        const opt = options.item(i);
-        if (opt?.selected) values.push(opt.value);
-      }
-      updateField(key, values.join(", "));
-    };
 
   return (
     <main className="space-y-4">
@@ -250,32 +241,18 @@ export default function PatientPage() {
               value={form.emergencyContactName ?? ""}
               onChange={(v) => updateField("emergencyContactName", v)}
             />
-            <FieldInput
-              label="Relationship"
+            <RelationshipSelect
               value={form.emergencyContactRelationship ?? ""}
               onChange={(v) => updateField("emergencyContactRelationship", v)}
             />
           </div>
 
-          {/* Religion multi-select */}
-          <div className="space-y-1">
-            <label className="text-sm font-medium text-slate-700">
-              Religion (multiple)
-            </label>
-            <select
-              multiple
-              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500 h-24"
-              onChange={(e) => handleMultiSelect("religion")(e.target.options)}
-            >
-              <option value="Buddhism">Buddhism</option>
-              <option value="Christianity">Christianity</option>
-              <option value="Islam">Islam</option>
-              <option value="Hinduism">Hinduism</option>
-            </select>
-            <p className="text-[11px] text-slate-500">
-              Selected: {form.religion || "none"}
-            </p>
-          </div>
+            <ReligionSelect
+              value={form.religion ?? ""}
+              onChange={(v) => updateField("religion", v)}
+            />
+
+          {/* </div> */}
         </SectionCard>
 
         <div className="flex items-center justify-between pt-4 border-t">
