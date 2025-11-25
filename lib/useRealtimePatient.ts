@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -18,8 +19,18 @@ export function useRealtimePatient(role: Role) {
     });
 
     channel.bind("update", (payload: unknown) => {
+      // ดู payload จริงก่อน
+      // console.log("[PUSHER] update payload:", payload);
+
       const parsed = patientSchema.safeParse(payload);
-      if (parsed.success) setData(parsed.data);
+      if (!parsed.success) {
+        // console.warn("[PUSHER] invalid payload for patientSchema", parsed.error);
+        // ถ้าอยากให้ staff เห็นอยู่ดี ให้ fallback มาใช้ payload ดิบ ๆ
+        setData(payload as PatientData);
+        return;
+      }
+
+      setData(parsed.data);
     });
 
     return () => {
@@ -30,7 +41,7 @@ export function useRealtimePatient(role: Role) {
   }, []);
 
   const sendUpdate = async (payload: PatientData) => {
-    if (role !== "patient") return; // staff ไม่ส่งข้อมูล
+    if (role !== "patient") return;
     await fetch("/api/patient-update", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

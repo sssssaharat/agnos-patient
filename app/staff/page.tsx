@@ -24,26 +24,33 @@ export default function StaffPage() {
     <main className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-        <p className="text-6xl">🔎</p>
-        <h2 className="text-2xl font-semibold ">Staff View</h2>
-      </div>
-        <span className="text-xs text-slate-600">
-          Connection:{" "}
-          <span className={connected ? "text-emerald-600" : "text-red-500"}>
-            {connected ? "Online" : "Offline"}
+          <p className="text-6xl">🔎</p>
+          <h2 className="text-2xl font-semibold ">Staff View</h2>
+        </div>
+        <div className="flex items-center gap-3 text-xs text-slate-600">
+          <span>
+            Connection:{" "}
+            <span className={connected ? "text-emerald-600" : "text-red-500"}>
+              {connected ? "Online" : "Offline"}
+            </span>
           </span>
-        </span>
+          <span>
+           Status:{" "}
+          {data ? <StatusBadge status={data.status} /> : <span className="text-slate-400">No patient</span>}
+          </span>
+        </div>
+
       </div>
 
       <div className="bg-white rounded-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)] px-6 py-5 sm:px-8 sm:py-7">
-        <div className="flex items-center justify-between mb-6">
+        {/* <div className="flex items-center justify-between mb-6">
           <h3 className="text-base font-semibold text-slate-900">
             Top Patients
           </h3>
           <button className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400">
             ⋮
           </button>
-        </div>
+        </div> */}
 
         <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
