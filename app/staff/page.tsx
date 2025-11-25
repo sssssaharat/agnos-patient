@@ -14,6 +14,15 @@ function initialsFromName(firstName?: string, lastName?: string) {
   return (f + l).toUpperCase() || "?";
 }
 
+function colorFromName(name: string) {
+  const colors = ["from-indigo-400 to-sky-400", "from-pink-400 to-red-400", "from-green-400 to-emerald-500"];
+  let sum = 0;
+
+  for (let i = 0; i < name.length; i++) sum += name.charCodeAt(i);
+  return colors[sum % colors.length];
+}
+
+
 export default function StaffPage() {
   const { data, connected } = useRealtimePatient("staff");
   const [showModal, setShowModal] = useState(false);
@@ -56,11 +65,11 @@ export default function StaffPage() {
           <table className="min-w-full text-sm">
             <thead className="text-xs text-slate-500">
               <tr className="border-b border-slate-100">
-                <th className="py-3 pr-4 text-left font-medium">Profile</th>
-                <th className="py-3 px-4 text-left font-medium">Gender</th>
-                <th className="py-3 px-4 text-left font-medium">Email</th>
-                <th className="py-3 px-4 text-left font-medium">Progress</th>
-                <th className="py-3 pl-4 text-left font-medium">Status</th>
+                <th className="py-3 pr-4 text-left font-semibold">Profile</th>
+                <th className="py-3 px-4 text-left font-semibold">Gender</th>
+                <th className="py-3 px-4 text-left font-semibold">Email</th>
+                <th className="py-3 px-4 text-left font-semibold">Progress</th>
+                <th className="py-3 pl-4 text-left font-semibold">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -84,7 +93,7 @@ export default function StaffPage() {
                   {/* Profile */}
                   <td className="py-4 pr-4">
                     <div className="flex items-center gap-3">
-                      <div className="h-9 w-9 rounded-full bg-gradient-to-br from-indigo-400 to-sky-400 flex items-center justify-center text-xs font-semibold text-white">
+                      <div className={`h-9 w-9 rounded-full bg-gradient-to-br ${colorFromName(row.firstName?? "")} flex items-center justify-center text-xs font-semibold text-white`}>
                         {initialsFromName(row.firstName, row.lastName)}
                       </div>
                       <div className="flex flex-col">
@@ -92,7 +101,7 @@ export default function StaffPage() {
                           {row.firstName} {row.lastName}
                         </span>
                         <span className="text-xs text-slate-500">
-                          {row.dateOfBirth || "No middleName"}
+                          {row.middleName || "No middleName"}
                         </span>
                       </div>
                     </div>
