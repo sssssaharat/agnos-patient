@@ -18,8 +18,7 @@ A real-time patient intake platform that allows healthcare staff to monitor form
 | Validation             | Zod                                            |
 | UI Components          | Custom + Tailwind                              |
 
-
-┌────────────────────┐         
+        
 # 🧠 System Behavior
 | Action                                    | Result                            |
 | ----------------------------------------- | --------------------------------- |
