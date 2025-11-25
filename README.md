@@ -19,7 +19,6 @@ A real-time patient intake platform that allows healthcare staff to monitor form
 | UI Components          | Custom + Tailwind                              |
 
 
-┌────────────────────┐         
 # 🧠 System Behavior
 | Action                                    | Result                            |
 | ----------------------------------------- | --------------------------------- |
@@ -87,3 +86,10 @@ Staff View → http://localhost:3000/staff
 * Audit logging
 * CRUD patient 
 * Search data patient
+
+## 🔗 Live Demo
+
+Production URL: https://agnos-patient.vercel.app/
+
+- Patient view: `/patient`
+- Staff view: `/staff`
