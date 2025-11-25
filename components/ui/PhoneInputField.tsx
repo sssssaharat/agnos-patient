@@ -18,7 +18,7 @@ export function PhoneInputField({
         country={"th"}
         value={value}
         onChange={(val) => onChange(val)}
-        inputClass="!w-full !rounded-md !border !border-slate-300 !bg-white !px-3 !py-2 text-sm"
+        inputClass="!w-full !rounded-md !border !border-slate-300 !bg-white !px-12 !py-2 text-sm"
       />
     </div>
   );

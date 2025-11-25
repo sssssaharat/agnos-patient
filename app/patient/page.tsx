@@ -14,7 +14,7 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { NationalitySelect } from "@/components/ui/NationalitySelect";
 import { ReligionSelect } from "@/components/ui/ReligionSelect";
 import { RelationshipSelect } from "@/components/ui/RelationshipSelect";
-
+import { PhoneInputField } from "@/components/ui/PhoneInputField";
 
 const initial: PatientData = {
   firstName: "",
@@ -188,11 +188,15 @@ export default function PatientPage() {
         {/* Contact */}
         <SectionCard title="Contact Information">
           <div className="grid sm:grid-cols-2 gap-4">
-            <FieldInput
+            {/* <FieldInput
               label="Phone Number"
               required
               value={form.phone}
               error={errors.phone}
+              onChange={(v) => updateField("phone", v)}
+            /> */}
+            <PhoneInputField
+              value={form.phone ?? ""}
               onChange={(v) => updateField("phone", v)}
             />
             <FieldInput
