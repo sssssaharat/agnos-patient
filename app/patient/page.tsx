@@ -84,7 +84,10 @@ export default function PatientPage() {
   return (
     <main className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Patient Form</h2>
+      <div className="flex items-center gap-2">
+        <p className="text-6xl">✏️</p>
+        <h2 className="text-2xl font-semibold ">Patient Form</h2>
+      </div>
         <div className="flex items-center gap-3 text-xs text-slate-600">
           <span>
             Connection:{" "}
@@ -100,7 +103,7 @@ export default function PatientPage() {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-4 bg-white rounded-xl shadow-sm p-6"
+        className="space-y-4 bg-white rounded-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)] px-6 py-6 sm:px-8 sm:py-7"
       >
         <SectionCard title="Personal Information">
           <div className="grid sm:grid-cols-3 gap-4">

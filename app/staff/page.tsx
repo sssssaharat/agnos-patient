@@ -1,108 +1,4 @@
-// "use client";
 
-// import { useRealtimePatient } from "@/lib/useRealtimePatient";
-// import type { PatientData } from "@/lib/validation";
-// import { SectionCard } from "@/components/ui/SectionCard";
-// import { StatusBadge } from "@/components/ui/StatusBadge";
-
-// function Metric({ label, value }: { label: string; value: string }) {
-//   return (
-//     <div className="bg-white rounded-xl shadow-sm p-4">
-//       <div className="text-xs text-slate-500">{label}</div>
-//       <div className="mt-1 text-lg font-semibold">{value}</div>
-//     </div>
-//   );
-// }
-
-// function Row({ label, value }: { label: string; value: string }) {
-//   return (
-//     <div className="flex justify-between gap-4 text-sm">
-//       <span className="text-slate-500">{label}</span>
-//       <span className="font-medium">{value || "—"}</span>
-//     </div>
-//   );
-// }
-
-// export default function StaffPage() {
-//   const { data, connected } = useRealtimePatient("staff");
-
-//   const d = <K extends keyof PatientData>(field: K): string =>
-//     data?.[field]?.toString() ?? "";
-
-
-//   return (
-//     <main className="space-y-4">
-//       <div className="flex items-center justify-between">
-//         <h2 className="text-xl font-semibold">Staff View</h2>
-//         <div className="flex items-center gap-3 text-xs text-slate-600">
-//           <span>
-//             Connection:{" "}
-//             <span className={connected ? "text-emerald-600" : "text-red-500"}>
-//               {connected ? "Online" : "Offline"}
-//             </span>
-//           </span>
-//           <span>
-//             Status:{" "}
-//             {data ? (
-//               <StatusBadge status={data.status} />
-//             ) : (
-//               <span className="text-slate-500">No patient yet</span>
-//             )}
-//           </span>
-//         </div>
-//       </div>
-
-//       <div className="grid sm:grid-cols-3 gap-4">
-//         <Metric
-//           label="Patient Name"
-//           value={
-//             data
-//               ? `${data.firstName} ${data.lastName}`.trim()
-//               : "Waiting for patient"
-//           }
-//         />
-//         <Metric
-//           label="Last Updated"
-//           value={data ? new Date().toLocaleTimeString() : "—"}
-//         />
-//         <Metric
-//           label="Activity"
-//           value={data ? data.status.toUpperCase() : "—"}
-//         />
-//       </div>
-
-//       <div className="grid md:grid-cols-2 gap-4">
-//         <SectionCard title="Personal Information">
-//           <Row label="First Name" value={d("firstName")} />
-//           <Row label="Middle Name" value={d("middleName")} />
-//           <Row label="Last Name" value={d("lastName")} />
-//           <Row label="Date of Birth" value={d("dateOfBirth")} />
-//           <Row label="Gender" value={d("gender")} />
-//         </SectionCard>
-
-//         <SectionCard title="Contact Information">
-//           <Row label="Phone Number" value={d("phone")} />
-//           <Row label="Email" value={d("email")} />
-//           <Row label="Address" value={d("address")} />
-//           <Row label="Preferred Language" value={d("preferredLanguage")} />
-//           <Row label="Nationality" value={d("nationality")} />
-//         </SectionCard>
-
-//         <SectionCard title="Emergency Contact & Other">
-//           <Row
-//             label="Emergency Contact Name"
-//             value={d("emergencyContactName")}
-//           />
-//           <Row
-//             label="Relationship"
-//             value={d("emergencyContactRelationship")}
-//           />
-//           <Row label="Religion" value={d("religion")} />
-//         </SectionCard>
-//       </div>
-//     </main>
-//   );
-// }
 "use client";
 
 import { useState } from "react";
@@ -127,7 +23,10 @@ export default function StaffPage() {
   return (
     <main className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Staff View</h2>
+        <div className="flex items-center gap-2">
+        <p className="text-6xl">🔎</p>
+        <h2 className="text-2xl font-semibold ">Staff View</h2>
+      </div>
         <span className="text-xs text-slate-600">
           Connection:{" "}
           <span className={connected ? "text-emerald-600" : "text-red-500"}>
@@ -136,23 +35,25 @@ export default function StaffPage() {
         </span>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm p-4 sm:p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-semibold text-slate-800">
+      <div className="bg-white rounded-3xl shadow-[0_18px_45px_rgba(15,23,42,0.08)] px-6 py-5 sm:px-8 sm:py-7">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-base font-semibold text-slate-900">
             Top Patients
           </h3>
-          <span className="text-xs text-slate-400">Live monitor</span>
+          <button className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400">
+            ⋮
+          </button>
         </div>
 
         <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
             <thead className="text-xs text-slate-500">
               <tr className="border-b border-slate-100">
-                <th className="py-2 pr-4 text-left font-medium">Profile</th>
-                <th className="py-2 px-4 text-left font-medium">Gender</th>
-                <th className="py-2 px-4 text-left font-medium">Email</th>
-                <th className="py-2 px-4 text-left font-medium">Progress</th>
-                <th className="py-2 pl-4 text-left font-medium">Status</th>
+                <th className="py-3 pr-4 text-left font-medium">Profile</th>
+                <th className="py-3 px-4 text-left font-medium">Gender</th>
+                <th className="py-3 px-4 text-left font-medium">Email</th>
+                <th className="py-3 px-4 text-left font-medium">Progress</th>
+                <th className="py-3 pl-4 text-left font-medium">Status</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100">
@@ -170,11 +71,11 @@ export default function StaffPage() {
               {rows.map((row, idx) => (
                 <tr
                   key={idx}
-                  className="hover:bg-slate-50 cursor-pointer"
+                  className="hover:bg-slate-50 cursor-pointer transition-colors"
                   onClick={() => setShowModal(true)}
                 >
                   {/* Profile */}
-                  <td className="py-3 pr-4">
+                  <td className="py-4 pr-4">
                     <div className="flex items-center gap-3">
                       <div className="h-9 w-9 rounded-full bg-gradient-to-br from-indigo-400 to-sky-400 flex items-center justify-center text-xs font-semibold text-white">
                         {initialsFromName(row.firstName, row.lastName)}
@@ -184,29 +85,29 @@ export default function StaffPage() {
                           {row.firstName} {row.lastName}
                         </span>
                         <span className="text-xs text-slate-500">
-                          {row.middleName || "No middleName"}
+                          {row.dateOfBirth || "No middleName"}
                         </span>
                       </div>
                     </div>
                   </td>
 
                   {/* Gender */}
-                  <td className="py-3 px-4 text-slate-700">
+                  <td className="py-4 px-4 text-slate-700">
                     {row.gender || "—"}
                   </td>
 
                   {/* Email */}
-                  <td className="py-3 px-4 text-slate-700">
+                  <td className="py-4 px-4 text-slate-700">
                     {row.email || "—"}
                   </td>
 
                   {/* Progress */}
-                  <td className="py-3 px-4">
+                  <td className="py-4 px-4">
                     <ProgressDots data={row} />
                   </td>
 
                   {/* Status */}
-                  <td className="py-3 pl-4">
+                  <td className="py-4 pl-4">
                     <StatusBadge status={row.status} />
                   </td>
                 </tr>
