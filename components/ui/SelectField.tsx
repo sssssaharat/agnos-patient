@@ -1,45 +1,47 @@
 "use client";
 
-import Select from "react-select";
-
 type Option = {
   label: string;
   value: string;
-  icon?: JSX.Element;
 };
 
 type SelectFieldProps = {
   label: string;
   value: string;
+  onChange: (v: string) => void;
   options: Option[];
-  onChange: (value: string) => void;
   required?: boolean;
   error?: string;
-  isMulti?: boolean;
 };
 
 export function SelectField({
   label,
   value,
-  options,
   onChange,
+  options,
   required,
   error,
-  isMulti,
 }: SelectFieldProps) {
   return (
     <div className="space-y-1">
       <label className="text-sm font-medium text-slate-700">
-        {label} {required && <span className="text-red-500">*</span>}
+        {label}
+        {required && <span className="text-red-500 ml-0.5">*</span>}
       </label>
 
-      <Select
-        value={options.find((o) => o.value === value)}
-        options={options}
-        onChange={(opt) => onChange((opt as Option).value)}
-        isMulti={isMulti}
-        className="text-sm"
-      />
+      <select
+        className="w-full h-10 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm 
+                   focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
+        <option value="">Select {label.toLowerCase()}</option>
+        {options.map((opt) => (
+          <option key={opt.value} value={opt.value}>
+            {opt.label}
+          </option>
+        ))}
+      </select>
 
       {error && <p className="text-xs text-red-500">{error}</p>}
     </div>

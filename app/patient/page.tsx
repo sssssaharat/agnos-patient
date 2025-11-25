@@ -14,7 +14,6 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { NationalitySelect } from "@/components/ui/NationalitySelect";
 import { ReligionSelect } from "@/components/ui/ReligionSelect";
 import { RelationshipSelect } from "@/components/ui/RelationshipSelect";
-import { PhoneInputField } from "@/components/ui/PhoneInputField";
 
 const initial: PatientData = {
   firstName: "",
@@ -173,7 +172,7 @@ export default function PatientPage() {
                 Gender
               </label>
               <select
-                className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
+                className="w-full h-9 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                 value={form.gender ?? ""}
                 onChange={(e) => updateField("gender", e.target.value)}
               >
@@ -188,17 +187,14 @@ export default function PatientPage() {
         {/* Contact */}
         <SectionCard title="Contact Information">
           <div className="grid sm:grid-cols-2 gap-4">
-            {/* <FieldInput
+            <FieldInput
               label="Phone Number"
               required
               value={form.phone}
               error={errors.phone}
               onChange={(v) => updateField("phone", v)}
-            /> */}
-            <PhoneInputField
-              value={form.phone ?? ""}
-              onChange={(v) => updateField("phone", v)}
             />
+
             <FieldInput
               label="Email"
               type="email"
@@ -266,7 +262,13 @@ export default function PatientPage() {
           <button
             type="submit"
             disabled={submitting}
-            className="px-4 py-2 rounded-lg bg-sky-600 text-white text-sm font-medium disabled:opacity-60"
+            className="
+              px-4 py-2 rounded-lg text-sm font-medium text-white
+              bg-gradient-to-r from-sky-600 to-blue-600
+              hover:from-sky-700 hover:to-blue-700
+              transition-all duration-300
+              disabled:opacity-60 disabled:cursor-not-allowed
+            "
           >
             {submitting ? "Submitting..." : "Submit form"}
           </button>
